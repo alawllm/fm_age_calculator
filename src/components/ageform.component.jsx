@@ -1,37 +1,27 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Calculator from "./calculator.component";
 import arrowIcon from '../assets/icon-arrow.svg'
 
 
 function AgeForm() {
     //react keeps the reference to the object in memory
-    const [formData, setFormData] = useState({
+    const defaultFormData = {
         birthDay: '',
         birthMonth: '',
         birthYear: ''
-    })
+    }
 
-    //error states for handling errors
-    //error states should be handled inside of handle submit
+    const [formData, setFormData] = useState(defaultFormData)
 
     const defaultErrorState = {
         birthDay: false,
         birthMonth: false,
         birthYear: false
     }
+
+    //error states for handling errors
+    //error states should be handled inside of handle submit
     const [errors, setError] = useState(defaultErrorState);
-
-    console.log(errors)
-
-    //references
-    const dayRef = useRef();
-    const monthRef = useRef();
-    const yearRef = useRef();
-
-    //reseting error state 
-    const resetErrorState = () => {
-        setError(defaultErrorState)
-    }
 
     //assigning the correct state
     const handleChange = (evt) => {
@@ -45,20 +35,28 @@ function AgeForm() {
                 [changedField]: newValue
             }
         })
-        //reseting error state at the end
-        resetErrorState();
     }
 
     const validateDay = (day, month, year) => {
+        const longMonths = [1, 3, 5, 6, 8, 10, 12]
+        const shortMonths = [4, 7, 9, 11]
         if (day > 0 && day <= 31) {
-            const longMonths = [1, 3, 5, 6, 8, 10, 12]
-            const shortMonths = [4, 7, 9, 11]
             if (longMonths.includes(month)) {
                 return true;
             } else if (shortMonths.includes(month)) {
-                day <= 30 ? true : false
+                if (day <= 30) return true;
             } else if (month === 2) {
-                //check february
+                //check february and leap years
+                if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
+                    if (day <= 29) {
+                        return true;
+                    }
+                } else {
+                    // non-leap year
+                    if (day <= 28) {
+                        return true;
+                    }
+                }
             }
         }
         //in case if day is less than zero or more than current date
@@ -66,17 +64,18 @@ function AgeForm() {
     }
 
     const validateMonth = (month) => {
-        month > 0 && month <= 12 ? true : false
+        return month > 0 && month <= 12 ? true : false
     }
 
     const validateYear = (year) => {
         let currentDate = new Date()
         let currentYear = currentDate.getFullYear()
 
-        year > 1920 && year <= currentYear ? true : false
+        return year > 1920 && year <= currentYear ? true : false
     }
 
     const validateInputs = (day, month, year) => {
+
         if (validateDay(day) === false) {
             setError((prevErrors) => ({
                 ...prevErrors,
@@ -102,46 +101,21 @@ function AgeForm() {
     const handleSubmit = (evt) => {
         evt.preventDefault()
 
-        let birthDayInput = 23
-        let birthMonthInput = 4
-        let birthYearInput = 2004
+        let birthDayInput = parseInt(formData.birthDay)
+        let birthMonthInput = parseInt(formData.birthMonth)
+        let birthYearInput = parseInt(formData.birthYear)
+        console.log(birthDayInput, birthMonthInput, birthYearInput)
 
-        let booleanDay = validateDay(birthDayInput)
-        let booleanMonth = validateMonth(birthMonthInput)
-        let booleanYear = validateYear(birthYearInput)
-        console.log(booleanDay, booleanMonth, booleanYear)
+        validateInputs(birthDayInput, birthMonthInput, birthYearInput)
 
-        //set error states inside of validation
-        //if validation ok, set new states
-        // if (evt.target.validity.patternMismatch) {
-        //     setError(currError => {
-        //         currError[fieldWithError] = newValue;
-        //         return {
-        //             ...currError,
-        //             [fieldWithError]: newValue
-        //         }
-        //     })
-        // }
+        const hasErrors = Object.values(errors).some((error) => error === true);
+
+        if (!hasErrors) {
+            setFormData(defaultFormData)
+            setError(defaultErrorState)
+        }
 
     }
-
-
-    //handling blur - setting error to true
-    // const handleBlur = (evt) => {
-    //     const fieldWithError = evt.target.name;
-    //     const newValue = true;
-    //     //indicates whether the user has entered a value that does not satisfy the pattern
-    //     //attr value
-    //     if (evt.target.validity.patternMismatch) {
-    //         setError(currError => {
-    //             currError[fieldWithError] = newValue;
-    //             return {
-    //                 ...currError,
-    //                 [fieldWithError]: newValue
-    //             }
-    //         })
-    //     }
-    // }
 
     //error styling
     function style(error) {
@@ -169,7 +143,6 @@ function AgeForm() {
                     style={style(errors)}
                     value={formData.birthDay}
                     onChange={handleChange}
-                    ref={dayRef}
                     required
                 />
                 {/* //if the error exists, the paragraph will be shown */}
@@ -190,7 +163,6 @@ function AgeForm() {
                     style={style(errors)}
                     value={formData.birthMonth}
                     onChange={handleChange}
-                    ref={monthRef}
                     required
                 />
                 {errors.birthMonth && (
@@ -209,7 +181,6 @@ function AgeForm() {
                     style={style(errors)}
                     value={formData.birthYear}
                     onChange={handleChange}
-                    ref={yearRef}
                     required
                 />
                 {errors.birthYear && (
