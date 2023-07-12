@@ -101,6 +101,9 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 - [MDN - getting time out of a data](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime?retiredLocale=de)
 - [Freecodecamp - how to build forms in React](https://www.freecodecamp.org/news/how-to-build-forms-in-react/) 
+- [How to handle invalid user inputs in React](https://medium.com/web-dev-survey-from-kyoto/how-to-handle-invalid-user-inputs-in-react-forms-for-ux-design-best-practices-e3108ef8a793)
+-[Use React Refs for individual field validation with auto-focused inputs](https://levelup.gitconnected.com/add-individual-field-validation-with-auto-focused-input-to-login-form-3267bd27d67c)
+
 
 **Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
 

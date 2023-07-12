@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Calculator from "./calculator.component";
+import arrowIcon from '../assets/icon-arrow.svg'
 
 function AgeForm() {
     //react keeps the reference to the object in memory
@@ -9,40 +10,82 @@ function AgeForm() {
         birthYear: ''
     })
 
-    const [error, setError] = useState(false);
+    //error states for handling errors
+    //error states should be handled inside of handle submit
+    const [error, setError] = useState({
+        birthDay: false,
+        birthMonth: false,
+        birthYear: false
+    });
 
+    console.log(error)
+
+    //references
+    const dayRef = useRef();
+    const monthRef = useRef();
+    const yearRef = useRef();
+
+    //assigning the correct state
     const handleChange = (evt) => {
         const changedField = evt.target.name;
         const newValue = evt.target.value;
-        //input error needs to be stored in the state
-        //if (isNaN(newValue)) setInputError('Input must be a number')
 
         setFormData(currData => {
             currData[changedField] = newValue;
             return {
-                //spread operator makes a copy - different object in memory
                 ...currData,
-                //updating the value
-                //square brackets - variable
                 [changedField]: newValue
             }
         })
     }
 
+    //preventing default behaviour of the formular
     const handleSubmit = (evt) => {
         evt.preventDefault()
-    }
 
-    const handleBlur = (evt) => {
-        //indicates whether the user has entered a value that does not satisfy the pattern
-        //attr value
+        const fieldWithError = evt.target.name;
+        const newValue = true;
+
+        //call validation
+        //set error states inside of validation
+        //if validation ok, set new states
         if (evt.target.validity.patternMismatch) {
-            setError(true)
-            console.log(error)
+            setError(currError => {
+                currError[fieldWithError] = newValue;
+                return {
+                    ...currError,
+                    [fieldWithError]: newValue
+                }
+            })
         }
     }
 
-    //styled error does not show
+    // const validateInput = () => {
+    //     const fields = [
+    //         name: 'birthDay',
+    //         value: state.birthDay,
+    //         message:
+    //     ]
+    // }
+
+    //handling blur - setting error to true
+    // const handleBlur = (evt) => {
+    //     const fieldWithError = evt.target.name;
+    //     const newValue = true;
+    //     //indicates whether the user has entered a value that does not satisfy the pattern
+    //     //attr value
+    //     if (evt.target.validity.patternMismatch) {
+    //         setError(currError => {
+    //             currError[fieldWithError] = newValue;
+    //             return {
+    //                 ...currError,
+    //                 [fieldWithError]: newValue
+    //             }
+    //         })
+    //     }
+    // }
+
+    //error styling
     function style(error) {
         if (error) {
             return {
@@ -53,11 +96,13 @@ function AgeForm() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <h1>{formData.birthDay} {formData.birthMonth} {formData.birthYear}</h1>
+            <form>
+                <h1>day: {formData.birthDay} month: {formData.birthMonth} year: {formData.birthYear}</h1>
                 <label htmlFor="day">Day</label>
                 <input type="text"
                     id="birthday"
+                    //name matches state properties
+                    //state can be set with that name
                     name="birthDay"
                     placeholder="day"
                     inputMode="decimal"
@@ -66,9 +111,10 @@ function AgeForm() {
                     style={style(error)}
                     value={formData.birthDay}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    ref={dayRef}
                 />
-                {error && (
+                {/* //if the error exists, the paragraph will be shown */}
+                {error.birthDay && (
                     <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
                         Must be a valid day
                     </p>
@@ -85,9 +131,9 @@ function AgeForm() {
                     style={style(error)}
                     value={formData.birthMonth}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    ref={monthRef}
                 />
-                {error && (
+                {error.birthMonth && (
                     <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
                         Must be a valid month
                     </p>
@@ -103,14 +149,16 @@ function AgeForm() {
                     style={style(error)}
                     value={formData.birthYear}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    ref={yearRef}
                 />
-                {error && (
+                {error.birthYear && (
                     <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
                         Must be in the past
                     </p>
                 )}
-                <button type="submit">Submit</button>
+                <button type="submit" onClick={handleSubmit}>
+                    <img src={arrowIcon} alt="arrow icon" />
+                </button>
             </form >
 
             <Calculator
