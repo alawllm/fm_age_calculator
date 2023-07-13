@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 function calculateAge(birthDay, birthMonth, birthYear) {
     let currentDate = new Date()
     let currentDay = currentDate.getDate()
@@ -7,24 +9,29 @@ function calculateAge(birthDay, birthMonth, birthYear) {
     let ageYears = currentYear - birthYear;
     let ageMonths = currentMonth - birthMonth;
     let ageDays = currentDay - birthDay
+
     console.log(`years: ${ageYears} months: ${ageMonths} days: ${ageDays}`)
-    return ageYears, ageMonths, ageDays
+
+    return { ageYears, ageMonths, ageDays }
 }
 
-function Calculator({ day, month, year }) {
-    console.log(day, month, year)
+function Calculator({ day, month, year, isSubmitted }) {
+
     let birthDay = parseInt(day)
     let birthMonth = parseInt(month)
     let birthYear = parseInt(year)
-    console.log(birthDay, birthMonth, birthYear)
-    calculateAge(birthDay, birthMonth, birthYear)
+
+    //destructuring properties from the returned object
+    let { ageYears, ageMonths, ageDays } = calculateAge(birthDay, birthMonth, birthYear)
+    console.log(ageYears, ageMonths, ageDays)
 
     return (
         <>
-            {/* <p>{ageYears} years</p>
-            <p>{ageMonths} months</p>
-            <p>{ageDays}days</p> */}
-            {/* <p>{currentDay} {currentMonth} {currentYear}</p> */}
+            {!isSubmitted &&
+                (<><p>- - years</p><p>- - months</p><p>- - days</p></>)}
+            {isSubmitted &&
+                (<><p>{ageYears} years</p><p>{ageMonths} months</p><p>{ageDays}days</p></>)}
+
         </>
     )
 }

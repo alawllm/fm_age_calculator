@@ -5,23 +5,20 @@ import arrowIcon from '../assets/icon-arrow.svg'
 
 function AgeForm() {
     //react keeps the reference to the object in memory
-    const defaultFormData = {
+
+    const [formData, setFormData] = useState({
         birthDay: '',
         birthMonth: '',
         birthYear: ''
-    }
+    })
 
-    const [formData, setFormData] = useState(defaultFormData)
-
-    const defaultErrorState = {
+    const [errors, setError] = useState({
         birthDay: false,
         birthMonth: false,
         birthYear: false
-    }
+    });
 
-    //error states for handling errors
-    //error states should be handled inside of handle submit
-    const [errors, setError] = useState(defaultErrorState);
+    const [isSubmitted, setIsSubmitted] = useState(false)
 
     //assigning the correct state
     const handleChange = (evt) => {
@@ -38,8 +35,8 @@ function AgeForm() {
     }
 
     const validateDay = (day, month, year) => {
-        const longMonths = [1, 3, 5, 6, 8, 10, 12]
-        const shortMonths = [4, 7, 9, 11]
+        const longMonths = [1, 3, 5, 7, 8, 10, 12]
+        const shortMonths = [4, 6, 9, 11]
         if (day > 0 && day <= 31) {
             if (longMonths.includes(month)) {
                 return true;
@@ -75,25 +72,20 @@ function AgeForm() {
     }
 
     const validateInputs = (day, month, year) => {
+        setError((prevErrors) => ({
+            ...prevErrors,
+            birthDay: !validateDay(day, month, year)
+        }))
 
-        if (validateDay(day) === false) {
-            setError((prevErrors) => ({
-                ...prevErrors,
-                birthDay: true
-            }));
-        }
-        if (validateMonth(month) === false) {
-            setError((prevErrors) => ({
-                ...prevErrors,
-                birthMonth: true
-            }));
-        }
-        if (validateYear(year) === false) {
-            setError((prevErrors) => ({
-                ...prevErrors,
-                birthYear: true
-            }));
-        }
+        setError((prevErrors) => ({
+            ...prevErrors,
+            birthMonth: !validateMonth(month)
+        }))
+
+        setError((prevErrors) => ({
+            ...prevErrors,
+            birthYear: !validateYear(year)
+        }))
     };
 
 
@@ -101,20 +93,23 @@ function AgeForm() {
     const handleSubmit = (evt) => {
         evt.preventDefault()
 
-        let birthDayInput = parseInt(formData.birthDay)
-        let birthMonthInput = parseInt(formData.birthMonth)
-        let birthYearInput = parseInt(formData.birthYear)
-        console.log(birthDayInput, birthMonthInput, birthYearInput)
+        let birthDayInput = +(formData.birthDay)
+        let birthMonthInput = +(formData.birthMonth)
+        let birthYearInput = +(formData.birthYear)
+        console.log('inputs', birthDayInput, birthMonthInput, birthYearInput)
+
+        console.log('errors before validation', errors)
 
         validateInputs(birthDayInput, birthMonthInput, birthYearInput)
+        console.log('errors after validation', errors)
+
 
         const hasErrors = Object.values(errors).some((error) => error === true);
-
+        console.log('hasErrors', hasErrors)
         if (!hasErrors) {
-            setFormData(defaultFormData)
-            setError(defaultErrorState)
+            //setError(defaultErrorState)
+            setIsSubmitted(true)
         }
-
     }
 
     //error styling
@@ -129,7 +124,6 @@ function AgeForm() {
     return (
         <>
             <form>
-                <h1>day: {formData.birthDay} month: {formData.birthMonth} year: {formData.birthYear}</h1>
                 <label htmlFor="day">Day</label>
                 <input type="text"
                     id="birthday"
@@ -138,8 +132,7 @@ function AgeForm() {
                     name="birthDay"
                     placeholder="day"
                     inputMode="decimal"
-                    // pattern="^([1-9]|[12][0-9]|3[01])$"
-                    pattern="[0-9]"
+                    pattern="[0-9]{1,2}"
                     style={style(errors)}
                     value={formData.birthDay}
                     onChange={handleChange}
@@ -158,8 +151,7 @@ function AgeForm() {
                     name="birthMonth"
                     placeholder="month"
                     inputMode="decimal"
-                    // pattern="^([1-9]|1[012])$"
-                    pattern="[0-9]*"
+                    pattern="[0-9]{1,2}"
                     style={style(errors)}
                     value={formData.birthMonth}
                     onChange={handleChange}
@@ -177,7 +169,7 @@ function AgeForm() {
                     name="birthYear"
                     placeholder="year"
                     inputMode="decimal"
-                    pattern="[0-9]*"
+                    pattern="[0-9]{1,4}"
                     style={style(errors)}
                     value={formData.birthYear}
                     onChange={handleChange}
@@ -192,11 +184,11 @@ function AgeForm() {
                     <img src={arrowIcon} alt="arrow icon" className="arrow-icon" />
                 </button>
             </form >
-
             <Calculator
                 day={formData.birthDay}
                 month={formData.birthMonth}
-                year={formData.birthYear} />
+                year={formData.birthYear}
+                isSubmitted={isSubmitted} />
         </>
     )
 }
