@@ -4,14 +4,3 @@
   padding: 2rem;
   text-align: center;
 }
-
-button {
-  margin: 0;
-  background-color: white;
-}
-
-.arrow-icon {
-  clip-path: circle();
-  margin: 0;
-  background-color: purple;
-}

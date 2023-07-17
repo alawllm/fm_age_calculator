@@ -2,6 +2,8 @@ import { useState } from "react";
 import Calculator from "./calculator.component";
 import arrowIcon from '../assets/icon-arrow.svg'
 
+import './ageform.styles.scss'
+
 
 function AgeForm() {
     //react keeps the reference to the object in memory
@@ -103,7 +105,6 @@ function AgeForm() {
         validateInputs(birthDayInput, birthMonthInput, birthYearInput)
         console.log('errors after validation', errors)
 
-
         const hasErrors = Object.values(errors).some((error) => error === true);
         console.log('hasErrors', hasErrors)
         if (!hasErrors) {
@@ -116,70 +117,78 @@ function AgeForm() {
     function style(error) {
         if (error) {
             return {
-                backgroundColor: "rgba 255,0,0,0.5"
+                color: "rgba 255,0,0,0.5"
             }
         }
     }
 
     return (
         <>
-            <form>
-                <label htmlFor="day">Day</label>
-                <input type="text"
-                    id="birthday"
-                    //name matches state properties
-                    //state can be set with that name
-                    name="birthDay"
-                    placeholder="day"
-                    inputMode="decimal"
-                    pattern="[0-9]{1,2}"
-                    style={style(errors)}
-                    value={formData.birthDay}
-                    onChange={handleChange}
-                    required
-                />
-                {/* //if the error exists, the paragraph will be shown */}
-                {errors.birthDay && (
-                    <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-                        Must be a valid day
-                    </p>
-                )}
+            <form className="form">
+                <div className="inputs-structure">
+                    <div className="input-wrapper">
+                        <label htmlFor="day">DAY</label>
+                        <input type="text"
+                            id="birthday"
+                            //name matches state properties
+                            //state can be set with that name
+                            name="birthDay"
+                            placeholder="0"
+                            inputMode="decimal"
+                            pattern="[0-9]{1,2}"
+                            style={style(errors.birthDay)}
+                            value={formData.birthDay}
+                            onChange={handleChange}
+                            required
+                        />
+                        {/* //if the error exists, the paragraph will be shown */}
+                        {errors.birthDay && (
+                            <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                                Must be a valid day
+                            </p>
+                        )}
+                    </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="month">MONTH</label>
+                        <input type="text"
+                            id="birthmonth"
+                            name="birthMonth"
+                            placeholder="0"
+                            inputMode="decimal"
+                            pattern="[0-9]{1,2}"
+                            style={style(errors.birthMonth)}
+                            value={formData.birthMonth}
+                            onChange={handleChange}
+                            required
+                        />
+                        {errors.birthMonth && (
+                            <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                                Must be a valid month
+                            </p>
+                        )}
+                    </div>
+                    <div className="input-wrapper">
 
-                <label htmlFor="month">Month</label>
-                <input type="text"
-                    id="birthmonth"
-                    name="birthMonth"
-                    placeholder="month"
-                    inputMode="decimal"
-                    pattern="[0-9]{1,2}"
-                    style={style(errors)}
-                    value={formData.birthMonth}
-                    onChange={handleChange}
-                    required
-                />
-                {errors.birthMonth && (
-                    <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-                        Must be a valid month
-                    </p>
-                )}
-                <label htmlFor="year" placeholder="">Year</label>
+                        <label htmlFor="year" placeholder="">YEAR</label>
 
-                <input type="text"
-                    id="birthyear"
-                    name="birthYear"
-                    placeholder="year"
-                    inputMode="decimal"
-                    pattern="[0-9]{1,4}"
-                    style={style(errors)}
-                    value={formData.birthYear}
-                    onChange={handleChange}
-                    required
-                />
-                {errors.birthYear && (
-                    <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-                        Must be in the past
-                    </p>
-                )}
+                        <input type="text"
+                            id="birthyear"
+                            name="birthYear"
+                            placeholder="0"
+                            inputMode="decimal"
+                            pattern="[0-9]{1,4}"
+                            style={style(errors.birthYear)}
+                            value={formData.birthYear}
+                            onChange={handleChange}
+                            required
+                        />
+                        {errors.birthYear && (
+                            <p role="alert" style={{ color: "rgb(255, 0, 0)" }}>
+                                Must be valid year
+                            </p>
+                        )}
+                    </div>
+                </div>
                 <button type="submit" onClick={handleSubmit}>
                     <img src={arrowIcon} alt="arrow icon" className="arrow-icon" />
                 </button>

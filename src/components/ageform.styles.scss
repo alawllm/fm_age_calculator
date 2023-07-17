@@ -1,0 +1,43 @@
+.form {
+    background: white;
+
+    .inputs-structure {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .input-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            margin: 1rem;
+
+            label {
+                font-size: 16px;
+                font-weight: 400;
+                font-style: italic;
+                text-align: left;
+            }
+
+            input {
+                font-size: 24px;
+                font-weight: 800;
+                width: 100px;
+                height: 30px;
+                border-color: hsl(0, 0%, 86%);
+            }
+        }
+    }
+}
+
+button {
+    margin: 0;
+    background-color: white;
+    border: none;
+}
+
+.arrow-icon {
+    clip-path: circle();
+    margin: 0;
+    background-color: purple;
+}
