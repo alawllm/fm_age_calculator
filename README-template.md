@@ -6,17 +6,13 @@ This is a solution to the [Age calculator app challenge on Frontend Mentor](http
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -33,23 +29,11 @@ Users should be able to:
   - The date is invalid e.g. 31/04/1991 (there are 30 days in April)
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
-- **Bonus**: See the age numbers animate to their final number when the form is submitted
 
-### Screenshot
-
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Add solution URL here](https://github.com/alawllm/fm_age_calculator_app)
 - Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
 ## My process
@@ -61,17 +45,19 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Flexbox
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- App started in React Vite
+- App in React Vite
 
 ### What I learned
 
-I have learned a lot on this project, especially input validation and working with time in JS / React. It was a good opportunity to referesh some of React's features before jumping back into courses from which I learned. 
+I have learned a lot on this project, especially building input validation from scratch and working with date / time in JS / React. 
 
-### Continued development
+However, the design demanded separating day, month and year fields and showing separate messages for them. As the day depends on a months and on a year, it will be prone to mistakes. When the month/year is invalid, the day will be invalid as well.
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+I have built the validation without solving every edge case, as well as built the age calculator in pure JS.
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+It was a good learning experience, however I have decided not to continue with the project as it would be mostly solving validation edge cases from now and I did not want to leave solved edge cases.
+
+Another good solution would be using a validation library, such as React Hook Form. However, it is also a good experience to try to build it yourself.
 
 ### Useful resources
 
@@ -83,12 +69,8 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Author
 
-- Frontend Mentor - [@alawllm](https://www.frontendmentor.io/profile/yourusername)
-- GitHub - [@yourusername](https://www.twitter.com/yourusername)
-- LinkedIn - [@yourusername](https://www.twitter.com/yourusername)
+- GitHub - [@yourusername](https://github.com/alawllm)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
 
-## Acknowledgments
 
 

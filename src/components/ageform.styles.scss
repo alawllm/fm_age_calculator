@@ -7,30 +7,30 @@
         align-items: center;
         margin-bottom: 1rem;
         padding-right: 10rem;
+    }
 
-        .input-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: left;
-            margin: 1rem;
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        margin: 1rem;
 
-            label {
-                font-size: 16px;
-                font-weight: 400;
-                font-style: italic;
-                text-align: left;
-            }
+        label {
+            font-size: 16px;
+            font-weight: 400;
+            font-style: italic;
+            text-align: left;
+        }
 
-            input {
-                font-size: 24px;
-                font-weight: 800;
-                width: 100px;
-                height: 30px;
-                border-radius: 5px;
-                border: 1px solid;
-                border-color: hsl(0, 0%, 86%);
+        input {
+            font-size: 24px;
+            font-weight: 800;
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid;
+            border-color: hsl(0, 0%, 86%);
 
-            }
         }
     }
 

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './calculator.styles.scss'
 
 function calculateAge(birthDay, birthMonth, birthYear) {
@@ -45,6 +46,7 @@ function Calculator({ day, month, year, isSubmitted }) {
 
     //destructuring properties from the returned object
     let { ageYears, ageMonths, ageDays } = calculateAge(birthDay, birthMonth, birthYear)
+
     console.log(ageYears, ageMonths, ageDays)
 
     return (
@@ -53,7 +55,6 @@ function Calculator({ day, month, year, isSubmitted }) {
             {!isSubmitted &&
                 (<div className="years-text"><p>- - years</p><p>- - months</p><p>- - days</p></div>)}
             {/* if the form is submitted show numbers */}
-
             {isSubmitted &&
                 (<div className="years-text"><p>{ageYears} years</p><p>{ageMonths} months</p><p>{ageDays}days</p></div>)}
 
