@@ -12,7 +12,6 @@ This is a solution to the [Age calculator app challenge on Frontend Mentor](http
   - [What I learned](#what-i-learned)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -29,8 +28,7 @@ Users should be able to:
   - The date is invalid e.g. 31/04/1991 (there are 30 days in April)
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
-
-
+- 
 ### Links
 
 - Solution URL: [GitHub](https://github.com/alawllm/fm_age_calculator_app)
@@ -42,15 +40,14 @@ Users should be able to:
 - Semantic HTML5 markup
 - SCSS
 - Flexbox
-- Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- App in React Vite
+- App build React Vite
 
 ### What I learned
 
 I have learned a lot on this project, especially building input validation from scratch and working with date / time in JS / React. 
 
-However, the design demanded separating day, month and year fields and showing separate messages for them. As the day depends on a months and on a year, it will be prone to mistakes. When the month/year is invalid, the day will be invalid as well.
+However, the design demanded separating day, month and year fields and showing separate error messages for them. As the day depends on a months and on a year, it will be prone to mistakes. When the month/year is invalid, the day will be invalid as well.
 
 I have built the validation without solving every edge case, as well as built the age calculator in pure JS.
 
