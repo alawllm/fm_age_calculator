@@ -1,20 +1,11 @@
 .card {
     background-color: white;
     padding: 2rem;
+    max-width: 800px;
+    max-height: 600px;
     color: hsl(0, 0%, 8%);
     border-radius: 10px 10px 100px 10px;
     font-family: Poppins;
 }
 
 //ustawic odpowiednie wagi fontow
-
-button {
-    margin: 0;
-    background-color: white;
-}
-
-.arrow-icon {
-    clip-path: circle();
-    margin: 0;
-    background-color: purple;
-}

@@ -5,6 +5,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 1rem;
+        padding-right: 10rem;
 
         .input-wrapper {
             display: flex;
@@ -24,20 +26,31 @@
                 font-weight: 800;
                 width: 100px;
                 height: 30px;
+                border-radius: 5px;
+                border: 1px solid;
                 border-color: hsl(0, 0%, 86%);
+
             }
         }
     }
-}
 
-button {
-    margin: 0;
-    background-color: white;
-    border: none;
-}
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
 
-.arrow-icon {
-    clip-path: circle();
-    margin: 0;
-    background-color: purple;
+        button {
+            margin: 0;
+            border: none;
+            background-color: white;
+
+            .arrow-icon {
+                clip-path: circle();
+                border: none;
+                background-color: purple;
+                width: 70px;
+                height: 70px;
+            }
+        }
+    }
+
 }

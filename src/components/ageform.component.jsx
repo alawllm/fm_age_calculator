@@ -117,7 +117,16 @@ function AgeForm() {
     function style(error) {
         if (error) {
             return {
-                color: "rgba 255,0,0,0.5"
+                color: "red",
+                border: "1px solid red"
+            }
+        }
+    }
+
+    function inputStyle(error) {
+        if (error) {
+            return {
+                color: "red"
             }
         }
     }
@@ -127,13 +136,16 @@ function AgeForm() {
             <form className="form">
                 <div className="inputs-structure">
                     <div className="input-wrapper">
-                        <label htmlFor="day">DAY</label>
+                        <label
+                            htmlFor="day"
+                            style={inputStyle(errors.birthDay)}
+                        >DAY</label>
                         <input type="text"
                             id="birthday"
                             //name matches state properties
                             //state can be set with that name
                             name="birthDay"
-                            placeholder="0"
+                            placeholder="-"
                             inputMode="decimal"
                             pattern="[0-9]{1,2}"
                             style={style(errors.birthDay)}
@@ -149,11 +161,14 @@ function AgeForm() {
                         )}
                     </div>
                     <div className="input-wrapper">
-                        <label htmlFor="month">MONTH</label>
+                        <label
+                            htmlFor="month"
+                            style={inputStyle(errors.birthMonth)}
+                        >MONTH</label>
                         <input type="text"
                             id="birthmonth"
                             name="birthMonth"
-                            placeholder="0"
+                            placeholder="-"
                             inputMode="decimal"
                             pattern="[0-9]{1,2}"
                             style={style(errors.birthMonth)}
@@ -169,12 +184,15 @@ function AgeForm() {
                     </div>
                     <div className="input-wrapper">
 
-                        <label htmlFor="year" placeholder="">YEAR</label>
+                        <label
+                            htmlFor="year"
+                            style={inputStyle(errors.birthYear)}
+                        >YEAR</label>
 
                         <input type="text"
                             id="birthyear"
                             name="birthYear"
-                            placeholder="0"
+                            placeholder="-"
                             inputMode="decimal"
                             pattern="[0-9]{1,4}"
                             style={style(errors.birthYear)}
@@ -189,9 +207,11 @@ function AgeForm() {
                         )}
                     </div>
                 </div>
-                <button type="submit" onClick={handleSubmit}>
-                    <img src={arrowIcon} alt="arrow icon" className="arrow-icon" />
-                </button>
+                <div className="button-container">
+                    <button type="submit" onClick={handleSubmit}>
+                        <img src={arrowIcon} alt="arrow icon" className="arrow-icon" />
+                    </button>
+                </div>
             </form >
             <Calculator
                 day={formData.birthDay}

@@ -5,13 +5,35 @@ function calculateAge(birthDay, birthMonth, birthYear) {
     let currentDay = currentDate.getDate()
     let currentMonth = currentDate.getMonth() + 1
     let currentYear = currentDate.getFullYear()
-    //subtract given birth day from the current date
-    let ageYears = currentYear - birthYear;
-    let ageMonths = currentMonth - birthMonth;
-    let ageDays = currentDay - birthDay
+    let ageDays, ageMonths, ageYears;
+    const daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    if (currentDay < birthDay) {
+        currentMonth = currentMonth - 1;
+        ageDays = currentDay + daysPerMonth[birthMonth - 1] - birthDay
+        if (isLeapYear(currentYear) && currentMonth === 2) {
+            ageDays += 1
+        }
+    } else {
+        ageDays = currentDay - birthDay
+    }
+
+    if (currentMonth < birthMonth) {
+        currentYear = currentYear - 1;
+        ageMonths = currentMonth + 12 - birthMonth
+    } else {
+        ageMonths = currentMonth - birthMonth
+    }
+    ageYears = currentYear - birthYear;
 
     console.log(`years: ${ageYears} months: ${ageMonths} days: ${ageDays}`)
 
+    function isLeapYear(currentYear) {
+        if (currentYear % 4 === 0) return true;
+        if (currentYear % 100 === 0) {
+            return currentYear % 400 === 0
+        }
+    }
     return { ageYears, ageMonths, ageDays }
 }
 
