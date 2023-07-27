@@ -28,7 +28,7 @@ Users should be able to:
   - The date is invalid e.g. 31/04/1991 (there are 30 days in April)
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
-- 
+
 ### Links
 
 - Solution URL: [GitHub](https://github.com/alawllm/fm_age_calculator_app)
@@ -47,7 +47,7 @@ Users should be able to:
 
 I have learned a lot on this project, especially building input validation from scratch and working with date / time in JS / React. 
 
-However, the design demanded separating day, month and year fields and showing separate error messages for them. As the day depends on a months and on a year, it will be prone to mistakes. When the month/year is invalid, the day will be invalid as well.
+However, the design demanded separating day, month and year fields and showing separate error messages for them. As the day depends on a months and on a year, it can lead to mistakes. When the month/year is invalid, the day will be invalid as well.
 
 I have built the validation without solving every edge case, as well as built the age calculator in pure JS.
 
@@ -65,7 +65,7 @@ Another good solution would be using a validation library, such as React Hook Fo
 
 ## Author
 
-- GitHub - [@yourusername](https://github.com/alawllm)
+- GitHub - [@alawllm](https://github.com/alawllm)
 
 
 
