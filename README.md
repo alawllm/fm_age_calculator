@@ -50,11 +50,9 @@ I have learned a lot on this project, especially building input validation from 
 
 However, the design demanded separating day, month and year fields and showing separate error messages for them. As the day depends on a months and on a year, it can lead to mistakes. When the month/year is invalid, the day will be invalid as well.
 
-I have built the validation without solving every edge case, as well as built the age calculator in pure JS.
+I have built the validation, as well as built the age calculator in pure JS.
 
-It was a good learning experience, however I have decided not to continue with the project as it would be mostly solving validation edge cases from now and I did not want to leave solved edge cases.
-
-Another good solution would be using a validation library, such as React Hook Form. However, it is also a good experience to try to build it yourself.
+It was a good learning experience, however I have decided not to continue with the project as it would be mostly solving validation edge cases from now and I did not want to leave unsolved edge cases.
 
 ### Useful resources
 
